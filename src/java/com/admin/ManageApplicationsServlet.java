@@ -32,8 +32,8 @@ public class ManageApplicationsServlet extends HttpServlet {
             String sql =
                 "SELECT a.ID, s.NAME, c.CLUB_NAME, a.STATUS " +
                 "FROM CLUB_APPLICATION a " +
-                "JOIN STUDENT s ON a.STUDENT_MATRIC = s.MATRIC " +
-                "JOIN CLUBS c ON a.CLUB_ID = c.CLUB_ID";
+                "LEFT JOIN STUDENT s ON a.STUDENT_MATRIC = s.MATRIC " +
+                "Left JOIN CLUBS c ON a.CLUB_ID = c.CLUB_ID";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

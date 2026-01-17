@@ -1,14 +1,10 @@
 package com.BrowseClub;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -34,21 +30,36 @@ public class RegisterServlet extends HttpServlet {
             Connection conn = DriverManager.getConnection(
                     "jdbc:derby://localhost:1527/CLUBS", "app", "app");
 
-            String sql = "INSERT INTO STUDENT (NAME, MATRIC, EMAIL, PASSWORD) VALUES (?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement checkStmt =
+                    conn.prepareStatement("SELECT 1 FROM STUDENT WHERE MATRIC = ?");
+            checkStmt.setString(1, matric);
 
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next()) {
+                request.setAttribute("error", "Matric number already registered");
+                request.getRequestDispatcher("Register.jsp").forward(request, response);
+                return;
+            }
+
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO STUDENT (NAME, MATRIC, EMAIL, PASSWORD, ROLE) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, name);
             ps.setString(2, matric);
             ps.setString(3, email);
             ps.setString(4, password);
-
+            ps.setString(5, "STUDENT");
             ps.executeUpdate();
 
             ps.close();
+            checkStmt.close();
             conn.close();
 
-            // Redirect to login
-            response.sendRedirect("login.jsp");
+            request.setAttribute("success", true);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+
+        } catch (SQLIntegrityConstraintViolationException e) {
+            request.setAttribute("error", "Matric number already registered");
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
