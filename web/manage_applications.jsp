@@ -14,9 +14,13 @@
 <body>
 
 <div class="container">
-    <div class="page-header">
-        <h2>Club Applications</h2>
-    </div>
+    <div class="page-header header-flex">
+    <h2>Club Applications</h2>
+
+    <a href="AdminDashboardServlet" class="button">
+        Main Page
+    </a>
+</div>
 
     <div class="card">
         <table>

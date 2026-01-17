@@ -14,12 +14,13 @@ public class StudentDashboardServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        // 🔐 Protect dashboard (must login first)
-        if (session == null || session.getAttribute("user") == null) {
+        // 🔐 ROLE CHECK (PUT HERE)
+        if (session == null || !"STUDENT".equals(session.getAttribute("role"))) {
             response.sendRedirect("login.jsp");
             return;
         }
 
+        // If passed → show dashboard
         request.getRequestDispatcher("student_dashboard.jsp")
                .forward(request, response);
     }

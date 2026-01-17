@@ -196,3 +196,9 @@ a.button:hover {
     margin-top: 30px;   /* space from table */
     text-align: center; /* center the button (optional) */
 }
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -22,14 +22,12 @@
             <p style="color:red;"><%= request.getAttribute("error") %></p>
         <% } %>
 
-        <form action="LoginServlet" method="post">
+       <form action="LoginServlet" method="post">
+    <input type="text" name="matric" placeholder="Matric" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+</form>
 
-            <input type="text" name="matric" placeholder="Matric Number" required>
-            <input type="password" name="password" placeholder="Password" required>
-
-            <button type="submit" class="button">Login</button>
-
-        </form>
 
         <p style="margin-top:15px;">
             Don’t have an account?

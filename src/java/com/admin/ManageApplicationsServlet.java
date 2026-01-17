@@ -14,6 +14,13 @@ public class ManageApplicationsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // 🔐 ADMIN protection
+        HttpSession session = request.getSession(false);
+        if (session == null || !"ADMIN".equals(session.getAttribute("role"))) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
+
         List<Map<String, String>> applications = new ArrayList<>();
 
         try {
@@ -43,11 +50,14 @@ public class ManageApplicationsServlet extends HttpServlet {
             conn.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServletException(e);
         }
 
+        // ✅ SET DATA
         request.setAttribute("applications", applications);
-        request.getRequestDispatcher("manage_applications.jsp")
+
+        // ✅ ONE forward, AT THE END
+        request.getRequestDispatcher("/manage_applications.jsp")
                .forward(request, response);
     }
 }
