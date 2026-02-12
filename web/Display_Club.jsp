@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Display_Club
-    Created on : Jan 5, 2026, 12:26:45 PM
-    Author     : User
---%>
-
 <%@ page import="java.util.List" %>
 <%@ page import="com.BrowseClub.Club" %>
 
@@ -13,67 +7,75 @@
     <title>Browse Clubs</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<div class="container">
+<body class="landing-body">
 
-<div class="page-header">
-    <h2>Available Clubs</h2>
-</div>
- 
+<div class="landing-overlay">
+
+<div class="landing-card" style="max-width:1000px; width:100%;">
+
+    <h1>Available Clubs</h1>
+    <p>Explore and join your favorite clubs</p>
+
+    <!-- Search -->
     <div class="search-box">
-    <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Search club or advisor..."
-        onkeyup="filterClubs()"
-    >
-   
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search club or advisor..."
+            onkeyup="filterClubs()"
+        >
+    </div>
+
+    <!-- Table -->
+    <div class="card" style="margin-top:20px; background:rgba(255,255,255,0.1);">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Club Name</th>
+                <th>Advisor</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <%
+            List<Club> clubList = (List<Club>) request.getAttribute("clubList");
+            if (clubList != null) {
+                for (Club c : clubList) {
+        %>
+            <tr>
+                <td><%= c.getName() %></td>
+                <td><%= c.getAdvisor() %></td>
+                <td>
+                    <a class="button"
+                       href="ClubDetailServlet?id=<%= c.getId() %>">
+                        View Details
+                    </a>
+                </td>
+            </tr>
+        <%
+                }
+            }
+        %>
+        </tbody>
+
+    </table>
+
+    </div>
+
+    <!-- Back Button -->
+    <div style="margin-top:25px;">
+        <a href="StudentDashboardServlet" class="button landing-btn">
+            Back to Dashboard
+        </a>
+    </div>
+
 </div>
- 
-    
-<div class="card">
-<table>
-  <tr>
-    <th>Club Name</th>
-    <th>Advisor</th>
-    <th>Action</th>
-  </tr>
 
-<%
-  List<Club> clubList = (List<Club>) request.getAttribute("clubList");
-  if (clubList != null) {
-      for (Club c : clubList) {
-%>
-  <tr>
-    <td><%= c.getName() %></td>
-    <td><%= c.getAdvisor() %></td>
-    <td>
-     <a class="button" href="ClubDetailServlet?id=<%= c.getId() %>">
-    View Details
-</a>
-    
-    </td>
-  </tr>
-<%
-      }
-  }
-%>
-
-</table>
-</div> <!-- card -->
-
-
-
-
-<div class="back-btn">
-    <a href="StudentDashboardServlet" class="button">
-        Back to Dashboard
-    </a>
 </div>
 
-
-</div> <!-- container -->
 <script>
 function filterClubs() {
     const input = document.getElementById("searchInput");
@@ -92,5 +94,6 @@ function filterClubs() {
     });
 }
 </script>
+
 </body>
 </html>

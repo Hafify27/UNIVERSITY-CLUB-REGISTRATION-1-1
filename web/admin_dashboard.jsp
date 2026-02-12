@@ -1,99 +1,113 @@
-<%-- 
-    Document   : admin_dashboard
-    Created on : Jan 15, 2026, 9:02:57 AM
-    Author     : User
---%>
-
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    body {
-        padding-top: 70px; /* height of navbar */
-    }
-    
-    .stat-card {
-        height: 160px;
-        width: 160px;
-    }
-</style>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm mb-3">
-        <div class="container-fluid">
-            <span class="navbar-brand fw-bold">
-                Admin Panel
-            </span>
 
-            <div class="ms-auto d-flex align-items-center">
-                <span class="text-white me-3">
+<body class="landing-body">
+
+<div class="landing-overlay" style="flex-direction:column; padding:40px;">
+
+    <!-- Glass Navbar -->
+    <div class="landing-card mb-4" style="width:100%; max-width:1100px; padding:20px 30px;">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="m-0">Admin Panel</h4>
+            <div>
+                <span class="me-3">
                     Welcome, ${sessionScope.studentName}
                 </span>
-                <a href="LogoutServlet" class="btn btn-outline-light btn-sm">
+                <a href="LogoutServlet" 
+                   class="button landing-btn"
+                   style="background: linear-gradient(135deg,#ef4444,#dc2626);">
                     Logout
                 </a>
             </div>
         </div>
-    </nav>
-    <div class="container py-5">
-        <div class="d-flex gap-3 justify-content-center">
-            <div class="d-flex row row-cols-2 g-3">
-                <div class="cols">
-                    <div class=" card text-center shadow-sm">
-                        <div class="card-body">
-                            <h6 class="text-muted">Total Applications</h6>
-                            <h3 class="fw-bold">${total}</h3>
+    </div>
+
+    <!-- Main Content -->
+    <div class="landing-card" style="max-width:1100px; width:100%;">
+
+        <h2 class="mb-4">Dashboard Overview</h2>
+
+        <div class="row g-4">
+
+            <!-- Stats Section -->
+            <div class="col-md-8">
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-4 text-center"
+                             style="background:rgba(255,255,255,0.15);">
+                            <h6>Total Applications</h6>
+                            <h2 class="fw-bold">${total}</h2>
                         </div>
                     </div>
-                </div>
-                <div class="cols">
-                    <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <h6 class="text-muted">Pending</h6>
-                        <h3 class="fw-bold text-warning">${pending}</h3>
+
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-4 text-center"
+                             style="background:rgba(255,193,7,0.25);">
+                            <h6>Pending</h6>
+                            <h2 class="fw-bold">${pending}</h2>
+                        </div>
                     </div>
-                </div>
-                </div>
-                <div class="cols">
-                    <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <h6 class="text-muted">Approved</h6>
-                        <h3 class="fw-bold text-success">${approved}</h3>
+
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-4 text-center"
+                             style="background:rgba(34,197,94,0.25);">
+                            <h6>Approved</h6>
+                            <h2 class="fw-bold">${approved}</h2>
+                        </div>
                     </div>
-                </div>
-                </div>
-                <div class="cols">
-                    <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <h6 class="text-muted">Rejected</h6>
-                        <h3 class="fw-bold text-danger">${rejected}</h3>
+
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-4 text-center"
+                             style="background:rgba(239,68,68,0.25);">
+                            <h6>Rejected</h6>
+                            <h2 class="fw-bold">${rejected}</h2>
+                        </div>
                     </div>
-                </div>
+
                 </div>
             </div>
-            <div class="">
-                <div class="card shadow-sm">
-                    <div class="card-body d-flex vstack">
-                        <h5 class="mb-3 text-center">Actions</h5>
-                        <a href="ManageApplicationsServlet" class="btn btn-primary mb-3">
+
+            <!-- Actions Section -->
+            <div class="col-md-4">
+                <div class="p-4 rounded-4"
+                     style="background:rgba(255,255,255,0.15);">
+
+                    <h5 class="mb-4 text-center">Actions</h5>
+
+                    <div class="d-grid gap-3">
+
+                        <a href="ManageApplicationsServlet" 
+                           class="button landing-btn text-center">
                             Manage Applications
                         </a>
-                        <a href="ManageEventServlet" class="btn btn-success mb-3">
+
+                        <a href="ManageEventServlet" 
+                           class="button landing-btn button-green text-center">
                             Manage Events
                         </a>
 
-                        <a href="ManageClubServlet" class="btn btn-success mb-3">
+                        <a href="ManageClubServlet" 
+                           class="button landing-btn text-center">
                             Manage Clubs
                         </a>
+
                     </div>
+
                 </div>
             </div>
+
         </div>
-       
+
     </div>
+
+</div>
 
 </body>
 </html>

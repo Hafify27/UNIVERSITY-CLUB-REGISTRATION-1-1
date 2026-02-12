@@ -1,74 +1,108 @@
-<%-- 
-    Document   : manage_event
-    Created on : Jan 16, 2026, 11:46:57 AM
-    Author     : User
---%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manage Events</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
 
-<div class="container py-5">
+<body class="landing-body">
 
-<h3 class="mb-4">Manage Events</h3>
+<div class="landing-overlay">
 
-<a href="add_event.jsp" class="btn btn-success mb-3">+ Add Event</a>
+<div class="landing-card" style="max-width:1200px; width:100%;">
 
-<table class="table table-bordered table-hover bg-white shadow-sm">
-    <tr>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Organizer</th>
-        <th>Participant</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="m-0">Manage Events</h1>
+            <p class="mb-0">Create and control university events</p>
+        </div>
 
-    <c:forEach var="e" items="${events}">
-        <tr>
-            <td>${e.name}</td>
-            <td>${e.date}</td>
-            <td>${e.organizer}</td>
-            <td>${e.participant}</td>
-            <td>${e.status}</td>
-            <td>
-               
-    <a href="EditEventServlet?id=${e.id}" class="btn btn-sm btn-primary">
-        Edit
-    </a>
+        <a href="add_event.jsp" 
+           class="button landing-btn button-green">
+           + Add Event
+        </a>
+    </div>
 
-    <c:choose>
-        <c:when test="${e.status == 'PUBLISHED'}">
-            <span class="badge bg-success">Published</span>
-        </c:when>
-        <c:otherwise>
-            <a href="PublishEventServlet?id=${e.id}" 
-               class="btn btn-sm btn-warning">
-               Publish
-            </a>
-        </c:otherwise>
-    </c:choose>
+    <!-- Table Wrapper -->
+    <div style="background:rgba(255,255,255,0.1); padding:20px; border-radius:20px;">
 
-    <a href="DeleteEventServlet?id=${e.id}" 
-       class="btn btn-sm btn-danger"
-       onclick="return confirm('Delete this event?')">
-       Delete
-    </a>
-</td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Organizer</th>
+                    <th>Participant</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-            </td>
-        </tr>
-    </c:forEach>
-</table>
+            <tbody>
 
-<a href="AdminDashboardServlet" class="btn btn-secondary mt-3">Back</a>
+            <c:forEach var="e" items="${events}">
+                <tr>
+                    <td>${e.name}</td>
+                    <td>${e.date}</td>
+                    <td>${e.organizer}</td>
+                    <td>${e.participant}</td>
+
+                    <td>
+                        <c:choose>
+                            <c:when test="${e.status == 'PUBLISHED'}">
+                                <span style="color:#22c55e;">PUBLISHED</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span style="color:#facc15;">DRAFT</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+
+                    <td>
+
+                        <a href="EditEventServlet?id=${e.id}" 
+                           class="button landing-btn">
+                            Edit
+                        </a>
+
+                        <c:if test="${e.status != 'PUBLISHED'}">
+                            <a href="PublishEventServlet?id=${e.id}" 
+                               class="button landing-btn"
+                               style="background:linear-gradient(135deg,#facc15,#eab308);">
+                               Publish
+                            </a>
+                        </c:if>
+
+                        <a href="DeleteEventServlet?id=${e.id}" 
+                           class="button landing-btn"
+                           style="background:linear-gradient(135deg,#ef4444,#dc2626);"
+                           onclick="return confirm('Delete this event?')">
+                           Delete
+                        </a>
+
+                    </td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Back Button -->
+    <div class="mt-4">
+        <a href="AdminDashboardServlet" 
+           class="button landing-btn">
+            Back to Dashboard
+        </a>
+    </div>
 
 </div>
+
+</div>
+
 </body>
 </html>

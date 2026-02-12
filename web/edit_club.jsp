@@ -1,51 +1,65 @@
-<%-- 
-    Document   : edit_club
-    Created on : Jan 16, 2026, 1:03:12 PM
-    Author     : User
---%>
-
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Event</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Edit Club</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body class="landing-body">
 
-<div class="container py-5">
-    <div class="card shadow-sm">
-        <div class="card-body">
+<div class="landing-overlay">
 
-            <h4 class="mb-4">Edit Club</h4>
+    <div class="landing-card">
 
-            <form action="UpdateClubServlet" method="post">
+        <h1>Edit Club</h1>
+        <p>Update club information</p>
 
-                <input type="hidden" name="id" value="${id}">
+        <form action="UpdateClubServlet" method="post">
 
-                <div class="mb-3">
-                    <label>Club Name</label>
-                    <input name="clubName" class="form-control" value="${name}" required>
-                </div>
+            <input type="hidden" name="id" value="${id}">
 
-                <div class="mb-3">
-                    <label>Advisor</label>
-                    <input name="Advisor" class="form-control" value="${advisor}">
-                </div>
+            <input type="text"
+                   name="clubName"
+                   value="${name}"
+                   placeholder="Club Name"
+                   class="login-input"
+                   required>
 
-                <div class="mb-3">
-                    <label>Description</label>
-                    <textarea name="description" class="form-control">${description}</textarea>
-                </div>
+            <input type="text"
+                   name="advisor"
+                   value="${advisor}"
+                   placeholder="Advisor Name"
+                   class="login-input">
 
-                <button type="submit" class="btn btn-success">Update</button>
-                <a href="ManageClubServlet" class="btn btn-secondary">Cancel</a>
+            <textarea name="description"
+                      placeholder="Description"
+                      class="login-input"
+                      rows="3"
+                      style="border-radius: 20px;">${description}</textarea>
 
-            </form>
+            <div style="margin-top:20px;">
+                <button type="submit" 
+                        class="button button-green">
+                    Update
+                </button>
 
+                <a href="ManageClubServlet" 
+                   class="button">
+                   Cancel
+                </a>
+            </div>
+
+        </form>
+
+        <div class="back-btn">
+            <a href="AdminDashboardServlet" class="button">
+                Back to Dashboard
+            </a>
         </div>
+
     </div>
+
 </div>
 
 </body>

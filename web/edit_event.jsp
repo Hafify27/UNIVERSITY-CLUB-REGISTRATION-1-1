@@ -1,66 +1,83 @@
-<%-- 
-    Document   : edit_event
-    Created on : Jan 16, 2026, 12:12:33 PM
-    Author     : User
---%>
-
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Event</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body class="landing-body">
 
-<div class="container py-5">
-    <div class="card shadow-sm">
-        <div class="card-body">
+<div class="landing-overlay">
 
-            <h4 class="mb-4">Edit Event</h4>
+    <div class="landing-card">
 
-            <form action="UpdateEventServlet" method="post">
+        <h1>Edit Event</h1>
+        <p>Update event information</p>
 
-                <input type="hidden" name="id" value="${id}">
+        <form action="UpdateEventServlet" method="post">
 
-                <div class="mb-3">
-                    <label>Event Name</label>
-                    <input name="eventName" class="form-control" value="${name}" required>
-                </div>
+            <input type="hidden" name="id" value="${id}">
 
-                <div class="mb-3">
-                    <label>Event Date</label>
-                    <input type="date" name="eventDate" class="form-control" value="${date}" required>
-                </div>
+            <input type="text"
+                   name="eventName"
+                   value="${name}"
+                   placeholder="Event Name"
+                   class="login-input"
+                   required>
 
-                <div class="mb-3">
-                    <label>Organizer</label>
-                    <input name="organizer" class="form-control" value="${organizer}">
-                </div>
+            <input type="date"
+                   name="eventDate"
+                   value="${date}"
+                   class="login-input"
+                   required>
 
-                <div class="mb-3">
-                    <label>Participant</label>
-                    <input name="participant" class="form-control" value="${participant}">
-                </div>
+            <input type="text"
+                   name="organizer"
+                   value="${organizer}"
+                   placeholder="Organizer"
+                   class="login-input">
 
-                <div class="mb-3">
-                    <label>Description</label>
-                    <textarea name="description" class="form-control">${description}</textarea>
-                </div>
+            <input type="text"
+                   name="participant"
+                   value="${participant}"
+                   placeholder="Participant"
+                   class="login-input">
 
-                <div class="mb-3">
-                    <label>Contact Person</label>
-                    <input name="contact" class="form-control" value="${contact}">
-                </div>
+            <textarea name="description"
+                      placeholder="Description"
+                      class="login-input"
+                      rows="3"
+                      style="border-radius: 20px;">${description}</textarea>
 
-                <button type="submit" class="btn btn-success">Update</button>
-                <a href="ManageEventServlet" class="btn btn-secondary">Cancel</a>
+            <input type="text"
+                   name="contact"
+                   value="${contact}"
+                   placeholder="Contact Person"
+                   class="login-input">
 
-            </form>
+            <div style="margin-top:20px;">
+                <button type="submit" 
+                        class="button button-green">
+                    Update
+                </button>
 
+                <a href="ManageEventServlet" 
+                   class="button">
+                   Cancel
+                </a>
+            </div>
+
+        </form>
+
+        <div class="back-btn">
+            <a href="AdminDashboardServlet" class="button">
+                Back to Dashboard
+            </a>
         </div>
+
     </div>
+
 </div>
 
 </body>

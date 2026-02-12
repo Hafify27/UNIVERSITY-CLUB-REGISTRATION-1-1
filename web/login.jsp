@@ -1,37 +1,51 @@
-<%-- 
-    Document   : login
-    Created on : Jan 13, 2026, 10:33:12 AM
-    Author     : User
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Student Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="align-content-center vh-100">
-    <div class="container">
-        <div class="card" style="max-width:500px; margin:auto;">
-            <div class="p-3">
-               <h1 class="text-center">Student Login</h1>
-            <% if (request.getAttribute("error") != null) { %>
-                <p style="color:red;"><%= request.getAttribute("error") %></p>
-            <% } %>
-            <form action="LoginServlet" method="post">
-                <input class="form-control mb-2" type="text" name="matric" placeholder="Matric" required>
-                <input class="form-control mb-2" type="password" name="password" placeholder="Password" required>
-                <div class="d-flex">
-                <button class="btn btn-primary ms-auto" type="submit">Login</button>
-                </div>
-            </form>
-            <p style="margin-top:15px;">
-                Don’t have an account?
-                <a href="Register.jsp">Register</a>
-            </p> 
-            </div>
-        </div>
+
+<body class="landing-body">
+
+<div class="landing-overlay">
+
+    <div class="landing-card">
+
+        <h1>Student Login</h1>
+        <p>Please login to continue</p>
+
+        <% if (request.getAttribute("error") != null) { %>
+            <p style="color:#ff6b6b; font-weight:600;">
+                <%= request.getAttribute("error") %>
+            </p>
+        <% } %>
+
+        <form action="LoginServlet" method="post" style="margin-top:20px;">
+
+            <input type="text" name="matric" placeholder="Matric Number"
+                   class="login-input" required>
+
+            <input type="password" name="password" placeholder="Password"
+                   class="login-input" required>
+
+            <button type="submit" class="button landing-btn"
+                    style="margin-top:15px;">
+                Login
+            </button>
+
+        </form>
+
+        <p style="margin-top:20px; font-size:14px;">
+            Don’t have an account?
+            <a href="Register.jsp" style="color:#ffffff; font-weight:600;">
+                Register
+            </a>
+        </p>
+
     </div>
+
+</div>
+
 </body>
 </html>

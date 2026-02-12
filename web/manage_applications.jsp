@@ -1,35 +1,44 @@
-<%-- 
-    Document   : manage_applications
-    Created on : Jan 13, 2026, 1:20:13 PM
-    Author     : User
---%>
-
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manage Applications</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<div class="container">
-    <div class="page-header header-flex">
-    <h2>Club Applications</h2>
+<body class="landing-body">
 
-    <a href="AdminDashboardServlet" class="button">
-        Main Page
-    </a>
-</div>
+<div class="landing-overlay">
 
-    <div class="card">
+<div class="landing-card" style="max-width:1100px; width:100%;">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="m-0">Club Applications</h1>
+            <p class="mb-0">Manage student applications</p>
+        </div>
+
+        <a href="AdminDashboardServlet" 
+           class="button landing-btn">
+            Main Page
+        </a>
+    </div>
+
+    <!-- Table -->
+    <div style="background:rgba(255,255,255,0.1); padding:20px; border-radius:20px;">
+
         <table>
-            <tr>
-                <th>Student Name</th>
-                <th>Club</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Club</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
 
             <%
                 List<Map<String,String>> apps =
@@ -38,30 +47,47 @@
                 if (apps != null) {
                     for (Map<String,String> a : apps) {
             %>
-            <tr>
-                <td><%= a.get("student") %></td>
-                <td><%= a.get("club") %></td>
-                <td><%= a.get("status") %></td>
-                <td>
-                    <% if ("PENDING".equals(a.get("status"))) { %>
-                        <a class="button small success"
-                           href="UpdateStatusServlet?id=<%=a.get("id")%>&status=APPROVED">
-                           Approve
-                        </a>
 
-                        <a class="button small danger"
-                           href="UpdateStatusServlet?id=<%=a.get("id")%>&status=REJECTED">
-                           Reject
-                        </a>
-                    <% } else { %>
-                        
-                    <% } %>
-                </td>
-            </tr>
+                <tr>
+                    <td><%= a.get("student") %></td>
+                    <td><%= a.get("club") %></td>
+                    <td>
+                        <% if ("PENDING".equals(a.get("status"))) { %>
+                            <span style="color:#facc15;">PENDING</span>
+                        <% } else if ("APPROVED".equals(a.get("status"))) { %>
+                            <span style="color:#22c55e;">APPROVED</span>
+                        <% } else { %>
+                            <span style="color:#ef4444;">REJECTED</span>
+                        <% } %>
+                    </td>
+
+                    <td>
+                        <% if ("PENDING".equals(a.get("status"))) { %>
+
+                            <a class="button landing-btn button-green"
+                               href="UpdateStatusServlet?id=<%=a.get("id")%>&status=APPROVED">
+                               Approve
+                            </a>
+
+                            <a class="button landing-btn"
+                               style="background:linear-gradient(135deg,#ef4444,#dc2626);"
+                               href="UpdateStatusServlet?id=<%=a.get("id")%>&status=REJECTED">
+                               Reject
+                            </a>
+
+                        <% } %>
+                    </td>
+                </tr>
+
             <% } } %>
 
+            </tbody>
         </table>
+
     </div>
+
+</div>
+
 </div>
 
 </body>
