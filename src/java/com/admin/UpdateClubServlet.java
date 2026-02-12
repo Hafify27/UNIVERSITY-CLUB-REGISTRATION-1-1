@@ -25,16 +25,16 @@ public class UpdateClubServlet extends HttpServlet {
                 "jdbc:derby://localhost:1527/CLUBS", "app", "app"
             );
 
-             String sql = "INSERT INTO CLUBS (CLUB_NAME, DESCRIPTION, ADVISOR) "
-                       + "VALUES (?, ?, ?)";
-
+            String sql = "UPDATE CLUBS SET CLUB_NAME=?, DESCRIPTION=?, ADVISOR=? WHERE CLUB_ID=?";
             PreparedStatement ps = conn.prepareStatement(sql);
+
             ps.setString(1, request.getParameter("clubName"));
-            ps.setString(3, request.getParameter("Advisor"));
-            ps.setString(5, request.getParameter("description"));
-            ps.setInt(7, Integer.parseInt(request.getParameter("id")));
+            ps.setString(2, request.getParameter("description"));
+            ps.setString(3, request.getParameter("advisor"));
+            ps.setInt(4, Integer.parseInt(request.getParameter("id")));
 
             ps.executeUpdate();
+
             conn.close();
 
             response.sendRedirect("ManageClubServlet");

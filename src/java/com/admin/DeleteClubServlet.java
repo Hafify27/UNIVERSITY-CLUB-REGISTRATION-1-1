@@ -28,7 +28,7 @@ public class DeleteClubServlet extends HttpServlet {
                 "jdbc:derby://localhost:1527/CLUBS", "app", "app"
             );
 
-            String sql = "DELETE FROM EVENT WHERE EVENT_ID=?";
+            String sql = "DELETE FROM CLUBS WHERE CLUB_ID=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(id));
             ps.executeUpdate();
