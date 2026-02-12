@@ -1,53 +1,63 @@
-<%-- 
-    Document   : add_club
-    Created on : Jan 16, 2026, 12:53:14 PM
-    Author     : User
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
- <head>
-    <title>Add Event</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <title>Add Club</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body class="landing-body">
 
-<div class="container py-5">
-    <div class="card shadow-sm">
-        <div class="card-body">
+<div class="landing-overlay">
 
-            <h4 class="mb-4">Add Club</h4>
+    <div class="landing-card">
 
-            <form action="AddClubServlet" method="post">
+        <h1>Add Club</h1>
+        <p>Create a new club for the university</p>
 
-                <div class="mb-3">
-                    <label class="form-label">Club Name</label>
-                    <input name="clubName" class="form-control">
-                </div>
+        <form action="AddClubServlet" method="post">
 
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea name="description" class="form-control" rows="3"></textarea>
-                </div>
+            <input type="text" 
+                   name="clubName" 
+                   placeholder="Club Name"
+                   class="login-input"
+                   required>
 
-                <div class="mb-3">
-                    <label class="form-label">Advisor</label>
-                    <input name="advisor" class="form-control" required>
-                </div>
+            <textarea name="description"
+                      placeholder="Description"
+                      class="login-input"
+                      rows="3"
+                      style="border-radius: 20px;"></textarea>
 
-                <button type="submit" class="btn btn-success">Save </button>
-                <a href="ManageClubServlet" class="btn btn-secondary">Cancel</a>
-                
-</form>
+            <input type="text" 
+                   name="advisor" 
+                   placeholder="Advisor Name"
+                   class="login-input"
+                   required>
 
-            </form>
+            <div style="margin-top:20px;">
+                <button type="submit" 
+                        class="button button-green">
+                    Save
+                </button>
 
+                <a href="ManageClubServlet" 
+                   class="button">
+                   Cancel
+                </a>
+            </div>
+
+        </form>
+
+        <div class="back-btn">
+            <a href="AdminDashboardServlet" class="button">
+                Back to Dashboard
+            </a>
         </div>
+
     </div>
+
 </div>
 
 </body>
 </html>
-
