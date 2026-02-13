@@ -35,7 +35,7 @@ public class StudentDashboardServlet extends HttpServlet {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
             // ===============================
-            // 1️⃣ Approved Clubs
+            // Approved Clubs
             // ===============================
             String clubSql = "SELECT c.CLUB_NAME " +
                              "FROM APP.CLUB_APPLICATION a " +
@@ -54,7 +54,7 @@ public class StudentDashboardServlet extends HttpServlet {
             ps1.close();
 
             // ===============================
-            // 2️⃣ Upcoming Events
+            // Upcoming Events
             // ===============================
             String eventSql = "SELECT * FROM APP.EVENT " +
                               "WHERE EVENT_DATE >= CURRENT_DATE " +
